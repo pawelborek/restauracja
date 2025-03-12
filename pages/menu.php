@@ -1,3 +1,24 @@
+<?php
+// Połączenie z bazą danych
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bigfoodforyou";
+
+// Tworzenie połączenia
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Sprawdzanie połączenia
+if ($conn->connect_error) {
+    die("Połączenie nieudane: " . $conn->connect_error);
+}
+
+// Pobieranie danych z tabeli menu
+$sql = "SELECT * FROM menu";
+$result = $conn->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -5,9 +26,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - BigFoodForYou</title>
     <link rel="stylesheet" href="../menu.css">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+
 <header id="nawigacja">
         <nav id="navbar">
             <div class="logo">
@@ -16,71 +38,34 @@
             <ul class="nav-links">
                 <li><a href="../index.php">Strona główna</a></li>
                 <li><a href="menu.php">Menu</a></li>
-                <li><a href="login.php"><i class="fi fi-br-circle-user"></i></a></li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li><a href="profil.php"><i class="fi fi-br-circle-user"></i> Profil</a></li>
+                <?php else: ?>
+                    <li><a href="login.php">Zaloguj się</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <h1>Menu</h1>
+<main>
+    <h1>Menu</h1>
 
+    <div class="menu-container">
+        <?php while($row = $result->fetch_assoc()): ?>
+            <div class="menu-item">
+                <img src="../img/<?php echo $row['obrazek']; ?>" alt="<?php echo $row['nazwa']; ?>">
+                <div class="item-info">
+                    <h2><?php echo $row['nazwa']; ?></h2>
+                    <p><?php echo $row['opis']; ?></p>
+                    <div class="price"><?php echo $row['cena']; ?> PLN</div>
+                    <a href="zamowienie.php?item_id=<?php echo $row['id']; ?>" class="order-button">Zamów</a>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
+</main>
 
-        <div class="menu-category">
-            <h2>Przystawki</h2>
-            <ul>
-                <li>
-                    <img src="../img/caprese.jpg" alt="Przystawka 1">
-                    <div class="item-name">Sałatka Caprese</div>
-                    <div class="item-price">20 PLN</div>
-                    <div class="item-description">Sałatka z pomidorów, mozzarelli, bazylii i oliwy z oliwek.</div>
-                </li>
-                <li>
-                    <img src="../img/tatar.jpg" alt="Przystawka 2">
-                    <div class="item-name">Tatar z łososia</div>
-                    <div class="item-price">25 PLN</div>
-                    <div class="item-description">Tatar z surowego łososia, awokado, limonki i kolendry.</div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="menu-category">
-            <h2>Dania Główne</h2>
-            <ul>
-                <li>
-                    <img src="../img/poledwiczki.jpg" alt="Danie główne 1">
-                    <div class="item-name">Polędwiczki wieprzowe</div>
-                    <div class="item-price">45 PLN</div>
-                    <div class="item-description">Polędwiczki wieprzowe w sosie grzybowym z ziemniakami puree.</div>
-                </li>
-                <li>
-                    <img src="../img/losos.jpg" alt="Danie główne 2">
-                    <div class="item-name">Łosoś w sosie teriyaki</div>
-                    <div class="item-price">50 PLN</div>
-                    <div class="item-description">Grillowana ryba w sosie teriyaki, podana z ryżem jaśminowym.</div>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="menu-category">
-            <h2>Desery</h2>
-            <ul>
-                <li>
-                    <img src="../img/tiramisu.jpg" alt="Deser 1">
-                    <div class="item-name">Tiramisu</div>
-                    <div class="item-price">18 PLN</div>
-                    <div class="item-description">Włoski deser na bazie mascarpone, kawy i kakao.</div>
-                </li>
-                <li>
-                    <img src="../img/sernik.jpg" alt="Deser 2">
-                    <div class="item-name">Sernik na zimno</div>
-                    <div class="item-price">15 PLN</div>
-                    <div class="item-description">Sernik na zimno z owocami leśnymi.</div>
-                </li>
-            </ul>
-        </div>
-    </main>
-
-    <footer id="stopka">
+<footer id="stopka">
     <div class="footer-content">
         <div class="footer-section about">
             <h2>O nas</h2>
@@ -103,8 +88,11 @@
             </ul>
         </div>
     </div>
-    </footer>
+</footer>
 
-    <script src="../script.js"></script>
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

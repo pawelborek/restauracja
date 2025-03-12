@@ -1,0 +1,236 @@
+/* Resetowanie podstawowych ustawień */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+}
+
+#nawigacja {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+#navbar {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar .logo a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+#navbar .nav-links {
+    display: flex;
+    list-style: none;
+}
+
+#navbar .nav-links li {
+    margin: 0 15px;
+}
+
+#navbar .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#navbar .nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Stylizacja sekcji zamówienia */
+h1 {
+    font-size: 36px;
+    margin: 40px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: underline;
+    text-decoration-color: #27bcf7;
+    text-decoration-thickness: 2px;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Wyśrodkowanie formularza na stronie */
+.contact-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Wysokość widoku */
+    background-color: #f7f7f7; /* Kolor tła strony */
+}
+
+/* Styl formularza */
+.contact-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efekt po najechaniu na formularz */
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Styl nagłówka formularza */
+.contact-form h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Styl etykiet formularza */
+.contact-form label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+/* Styl inputów i textarea */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Efekt focus dla inputów i textarea */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #2575fc;
+    outline: none;
+}
+
+/* Styl przycisku */
+.contact-form button {
+    background-color: #333;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    width: 100%; /* Ustawienie przycisku na całą szerokość formularza */
+}
+
+/* Efekt hover dla przycisku */
+.contact-form button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+
+/* Dostosowanie stopki */
+#stopka {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.footer-section {
+    width: 30%;
+}
+
+.footer-section h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 5px;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+/* Responsywność */
+@media screen and (max-width: 768px) {
+    #navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .contact-form {
+        padding: 20px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
